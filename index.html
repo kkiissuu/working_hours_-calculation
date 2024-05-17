@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>勤務終了時間計算</title>
+</head>
+<body>
+    <h1>勤務終了時間計算</h1>
+    <form>
+        <label for="inputTime">入力時間（HHMM）：</label>
+        <input type="text" id="inputTime" placeholder="0930">
+        <button type="button" onclick="calculateEndTime()">計算</button>
+    </form>
+    <p id="result"></p>
+
+    <script>
+        function calculateEndTime() {
+            const inputTime = document.getElementById("inputTime").value;
+            const hours = parseInt(inputTime.substring(0, 2), 10);
+            const minutes = parseInt(inputTime.substring(2, 4), 10);
+
+            const totalMinutes = hours * 60 + minutes + 8 * 60 + 45;
+            const endHours = Math.floor(totalMinutes / 60);
+            const endMinutes = totalMinutes % 60;
+
+            document.getElementById("result").textContent = `勤務終了時間：${endHours.toString().padStart(2, "0")}:${endMinutes.toString().padStart(2, "0")}`;
+        }
+    </script>
+</body>
+</html>
